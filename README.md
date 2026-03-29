@@ -61,10 +61,88 @@ Open in browser:
 http://127.0.0.1:8000/docs
 ```
 
+🔑 Access Token Usage
 
-## 📌 Endpoints
+To use the API endpoints, you must first obtain an access token via OAuth.
 
-* GET /api/github/repos
-* POST /api/github/issues
-* GET /api/github/issues/{owner}/{repo}
-* POST /api/github/pull-request
+1. Steps to get access token:
+2. Open the following URL in your browser:
+```
+http://127.0.0.1:8000/api/auth/login
+```
+3. Log in to GitHub and authorize the application.
+4. After successful authentication, you will be redirected to:
+```
+/api/auth/callback
+```
+```
+The response will contain:
+{
+  "access_token": "your_token_here"
+}
+```
+
+
+## 📌 API Endpoints
+
+### 🔐 Authentication
+
+* **GET /api/auth/login**
+  Redirects user to GitHub for authentication.
+
+* **GET /api/auth/callback**
+  Handles GitHub OAuth callback and returns access token.
+
+---
+
+### 📂 GitHub Operations
+
+* **GET /api/github/repos**
+  Fetches repositories of the authenticated user.
+  **Header:**
+  `Authorization: Bearer <access_token>`
+
+---
+
+* **POST /api/github/issues**
+  Creates an issue in a repository.
+  **Header:**
+  `Authorization: Bearer <access_token>`
+  **Body:**
+
+  ```json
+  {
+    "owner": "username",
+    "repo": "repo_name",
+    "title": "Issue title",
+    "body": "Issue description"
+  }
+  ```
+
+---
+
+* **GET /api/github/issues/{owner}/{repo}**
+  Lists all issues for a given repository.
+  **Header:**
+  `Authorization: Bearer <access_token>`
+
+---
+
+
+* **POST /api/github/pull-request**
+  Creates a pull request between branches.
+  **Header:**
+  `Authorization: Bearer <access_token>`
+  **Body:**
+
+  ```json
+  {
+    "owner": "username",
+    "repo": "repo_name",
+    "title": "PR title",
+    "body": "PR description",
+    "head": "feature-branch",
+    "base": "main"
+  }
+  ```
+
