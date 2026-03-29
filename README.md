@@ -6,7 +6,7 @@
 * Fetch repositories
 * Create issues
 * List issues
-* Create pull requests (bonus)
+* Create pull requests
 
 ## 🛠 Tech Stack
 
