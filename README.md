@@ -23,7 +23,7 @@ uvicorn app.main:app --reload
 
 ## 🔐 Authentication
 
-Uses OAuth 2.0 for secure access (no hardcoded tokens)
+Authenticates users via GitHub and provides secure access using temporary access tokens.
 
 ## 📌 Endpoints
 
